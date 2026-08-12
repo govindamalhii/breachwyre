@@ -1,0 +1,337 @@
+/* ============================================================
+ * Breachwyre - Global CSS Design System
+ * AI-Native Cyber Incident Response Platform
+ * Theme: Cybersecurity Dark Mode with Glassmorphism
+ * ============================================================ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base Reset & Root Variables ─────────────────────────── */
+@layer base {
+  :root {
+    --color-bg-primary:   #050d1a;
+    --color-bg-surface:   #0a1628;
+    --color-bg-card:      #0f1f35;
+    --color-border:       #1a3050;
+    --color-glow-cyan:    #00d4ff;
+    --color-glow-purple:  #7c3aed;
+    --color-text:         #e2e8f0;
+    --color-muted:        #64748b;
+
+    /* Severity Colors */
+    --severity-critical:  #ef4444;
+    --severity-high:      #f97316;
+    --severity-medium:    #f59e0b;
+    --severity-low:       #10b981;
+  }
+
+  * {
+    @apply box-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-cyber-dark text-cyber-text font-sans m-0 p-0 min-h-screen;
+    background-image:
+      linear-gradient(rgba(0, 212, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 212, 255, 0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #050d1a; }
+  ::-webkit-scrollbar-thumb { background: #1a3050; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #00d4ff44; }
+
+  /* Focus Styles */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-cyber-glow ring-offset-2 ring-offset-cyber-dark;
+  }
+
+  /* Selection */
+  ::selection {
+    background: rgba(0, 212, 255, 0.2);
+    color: #00d4ff;
+  }
+}
+
+/* ── Component Layer ─────────────────────────────────────── */
+@layer components {
+
+  /* ── Glassmorphism Card ── */
+  .glass-card {
+    @apply bg-cyber-card/80 backdrop-blur-md border border-cyber-border/60 rounded-xl shadow-card;
+    background: linear-gradient(135deg, rgba(15,31,53,0.9) 0%, rgba(10,22,40,0.95) 100%);
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300;
+  }
+  .glass-card-hover:hover {
+    @apply shadow-card-hover border-cyber-glow/20;
+    transform: translateY(-2px);
+  }
+
+  /* ── Buttons ── */
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold
+           rounded-lg transition-all duration-200 hover:from-cyan-400 hover:to-blue-500
+           hover:shadow-glow-cyan active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed
+           flex items-center gap-2;
+  }
+
+  .btn-danger {
+    @apply px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-bold
+           rounded-lg transition-all duration-200 hover:from-red-500 hover:to-red-600
+           hover:shadow-glow-red active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed
+           flex items-center gap-2;
+  }
+
+  .btn-ghost {
+    @apply px-6 py-3 border border-cyber-border text-cyber-text font-medium rounded-lg
+           transition-all duration-200 hover:border-cyber-glow/50 hover:text-cyber-glow
+           hover:bg-cyber-glow/5 active:scale-95;
+  }
+
+  .btn-expert {
+    @apply px-6 py-3 bg-gradient-to-r from-violet-600 to-purple-700 text-white font-semibold
+           rounded-lg transition-all duration-200 hover:from-violet-500 hover:to-purple-600
+           hover:shadow-glow-purple active:scale-95 flex items-center gap-2;
+  }
+
+  /* ── Input Fields ── */
+  .input-field {
+    @apply w-full px-4 py-3 bg-cyber-surface/80 border border-cyber-border text-cyber-text
+           rounded-lg placeholder:text-cyber-muted/60 transition-all duration-200
+           focus:outline-none focus:border-cyber-glow/60 focus:ring-1 focus:ring-cyber-glow/30
+           focus:bg-cyber-surface;
+  }
+
+  .input-label {
+    @apply block text-sm font-medium text-cyber-text/80 mb-2;
+  }
+
+  .select-field {
+    @apply input-field appearance-none cursor-pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px;
+  }
+
+  .textarea-field {
+    @apply input-field resize-none;
+    min-height: 100px;
+  }
+
+  /* ── Severity Badges ── */
+  .badge-critical {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold
+           bg-red-500/15 text-red-400 border border-red-500/30;
+  }
+  .badge-high {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold
+           bg-orange-500/15 text-orange-400 border border-orange-500/30;
+  }
+  .badge-medium {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold
+           bg-amber-500/15 text-amber-400 border border-amber-500/30;
+  }
+  .badge-low {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold
+           bg-emerald-500/15 text-emerald-400 border border-emerald-500/30;
+  }
+
+  /* ── Status Badges ── */
+  .status-open {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold
+           bg-cyan-500/10 text-cyan-400 border border-cyan-500/20;
+  }
+  .status-in_progress {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold
+           bg-violet-500/10 text-violet-400 border border-violet-500/20;
+  }
+  .status-resolved {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold
+           bg-emerald-500/10 text-emerald-400 border border-emerald-500/20;
+  }
+
+  /* ── Navigation ── */
+  .nav-link {
+    @apply flex items-center gap-2 px-3 py-2 text-sm text-cyber-muted rounded-lg
+           transition-all duration-200 hover:text-cyber-text hover:bg-cyber-border/30;
+  }
+  .nav-link.active {
+    @apply text-cyber-glow bg-cyber-glow/10 border border-cyber-glow/20;
+  }
+
+  /* ── Section Headers ── */
+  .section-title {
+    @apply text-2xl font-display font-bold text-cyber-text tracking-tight;
+  }
+  .section-subtitle {
+    @apply text-sm text-cyber-muted mt-1;
+  }
+
+  /* ── Hash Display ── */
+  .hash-display {
+    @apply font-mono text-xs text-cyber-glow/80 bg-cyber-darker/80 px-3 py-2 rounded-md
+           border border-cyber-border/50 break-all;
+  }
+
+  /* ── Timeline Steps ── */
+  .timeline-step-active {
+    @apply w-10 h-10 rounded-full flex items-center justify-center
+           bg-cyber-glow/20 border-2 border-cyber-glow text-cyber-glow;
+  }
+  .timeline-step-done {
+    @apply w-10 h-10 rounded-full flex items-center justify-center
+           bg-emerald-500/20 border-2 border-emerald-500 text-emerald-400;
+  }
+  .timeline-step-pending {
+    @apply w-10 h-10 rounded-full flex items-center justify-center
+           bg-cyber-surface border-2 border-cyber-border text-cyber-muted;
+  }
+
+  /* ── Table Styles ── */
+  .data-table {
+    @apply w-full text-sm;
+  }
+  .data-table thead tr {
+    @apply border-b border-cyber-border;
+  }
+  .data-table thead th {
+    @apply px-4 py-3 text-left text-xs font-semibold text-cyber-muted uppercase tracking-wider;
+  }
+  .data-table tbody tr {
+    @apply border-b border-cyber-border/40 transition-colors duration-150;
+  }
+  .data-table tbody tr:hover {
+    background-color: rgba(0, 212, 255, 0.03);
+  }
+  .data-table tbody td {
+    @apply px-4 py-3 text-cyber-text;
+  }
+
+  /* ── Alert / AI Guidance Boxes ── */
+  .alert-critical {
+    @apply border border-red-500/30 rounded-lg p-4;
+    background-color: rgba(239, 68, 68, 0.08);
+  }
+  .alert-high {
+    @apply border border-orange-500/30 rounded-lg p-4;
+    background-color: rgba(249, 115, 22, 0.08);
+  }
+  .alert-medium {
+    @apply border border-amber-500/30 rounded-lg p-4;
+    background-color: rgba(245, 158, 11, 0.08);
+  }
+  .alert-low {
+    @apply border border-emerald-500/30 rounded-lg p-4;
+    background-color: rgba(16, 185, 129, 0.08);
+  }
+
+  /* ── Panic Button Wrapper ── */
+  .panic-ring {
+    @apply absolute inset-0 rounded-full;
+    animation: panic-ripple 1.5s ease-out infinite;
+  }
+  @keyframes panic-ripple {
+    0%   { transform: scale(1);   opacity: 0.6; }
+    100% { transform: scale(2.2); opacity: 0; }
+  }
+
+  /* ── Loading Spinner ── */
+  .spinner {
+    @apply w-5 h-5 border-2 border-cyber-border border-t-cyber-glow rounded-full;
+    animation: spin 0.7s linear infinite;
+  }
+
+  /* ── Modal Overlay ── */
+  .modal-overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center p-4;
+    background: rgba(5, 13, 26, 0.85);
+    backdrop-filter: blur(8px);
+  }
+  .modal-content {
+    @apply glass-card w-full max-w-2xl max-h-[90vh] overflow-y-auto;
+    box-shadow: 0 0 80px rgba(0,212,255,0.05), 0 20px 60px rgba(0,0,0,0.6);
+  }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    @apply flex flex-col w-64 min-h-screen bg-cyber-darker/95 border-r border-cyber-border/60
+           backdrop-blur-sm;
+  }
+
+  /* ── Glow Line Divider ── */
+  .glow-divider {
+    @apply w-full h-px bg-gradient-to-r from-transparent via-cyber-glow/30 to-transparent;
+  }
+
+  /* ── Terminal Text Effect ── */
+  .terminal-text {
+    @apply font-mono text-sm text-cyber-glow;
+  }
+  .terminal-text::after {
+    content: '_';
+    @apply animate-blink;
+  }
+}
+
+/* ── Utility Layer Extras ─────────────────────────────────── */
+@layer utilities {
+  .text-gradient-cyan {
+    background: linear-gradient(135deg, #00d4ff, #0ea5e9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .text-gradient-purple {
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .text-gradient-danger {
+    background: linear-gradient(135deg, #ef4444, #f97316);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  .glass {
+    background: rgba(15, 31, 53, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(26, 48, 80, 0.6);
+  }
+
+  .neon-text-cyan {
+    color: #00d4ff;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 30px rgba(0, 212, 255, 0.2);
+  }
+
+  .neon-border-cyan {
+    border-color: #00d4ff;
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.3), inset 0 0 8px rgba(0, 212, 255, 0.05);
+  }
+}
+
+/* ── Framer Motion Defaults ──────────────────────────────── */
+[data-framer-motion] {
+  will-change: transform, opacity;
+}

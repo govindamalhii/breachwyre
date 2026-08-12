@@ -1,0 +1,38 @@
+# ── Node.js ─────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Environment Variables ────────────────────
+.env
+.env.local
+.env.production
+.env.*.local
+
+# ── Build Outputs ────────────────────────────
+frontend/dist/
+frontend/.vite/
+backend/dist/
+
+# ── Uploads (Forensic Evidence) ─────────────
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# ── Logs ─────────────────────────────────────
+*.log
+logs/
+
+# ── Java Compiled Binaries ───────────────────
+java-tools/*.class
+
+# ── OS Files ─────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDE Files ────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo

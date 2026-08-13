@@ -8,7 +8,7 @@ const morgan = require('morgan');
 const path = require('path');
 const { connectRedis } = require('./config/redis');
 const { generalLimiter, authLimiter } = require('./middleware/rateLimiter');
-const sanitizeBody = require('./middleware/sanitize');
+const { sanitizeBody }                = require('./middleware/sanitize');
 
 // Import routes
 const authRoutes     = require('./routes/auth.routes');

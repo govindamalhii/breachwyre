@@ -27,14 +27,14 @@ app.use(helmet({
       scriptSrc: ["'self'"],
       styleSrc: ["'self'", "'unsafe-inline'"],
       imgSrc: ["'self'", "data:"],
-      connectSrc: ["'self'", process.env.FRONTEND_URL || 'http://localhost:5173']
+      connectSrc: ["'self'", process.env.FRONTEND_URL || 'https://breachwyre-k9fy.vercel.app/']
     }
   }
 }));
 
 // SECURITY: CORS setup
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: process.env.FRONTEND_URL || 'https://breachwyre-k9fy.vercel.app/',
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   credentials: true
 };
@@ -88,8 +88,7 @@ async function startServer() {
     }
 
     app.listen(PORT, () => {
-      console.log(\`Server listening on port \${PORT}\`);
-    });
+console.log(`Server listening on port ${PORT}`);    });
   } catch (err) {
     console.error('Failed to start server:', err);
     process.exit(1);

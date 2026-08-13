@@ -7,7 +7,7 @@ const { authenticate } = require('../middleware/auth');
  * Deterministic NLP-style rule-based classifier function
  */
 function classifyIncident(title, description, incident_type) {
-  const text = \`\${title} \${description} \${incident_type}\`.toLowerCase();
+  const text = (title + ' ' + description + ' ' + incident_type).toLowerCase();
 
   const keywords = {
     CRITICAL: ['ransomware', 'encrypted files', 'ransom note', 'data exfiltration', 'active breach', 'lateral movement', 'domain controller', 'all files encrypted'],

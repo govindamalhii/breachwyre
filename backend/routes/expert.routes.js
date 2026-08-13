@@ -136,7 +136,7 @@ router.patch('/:id/status', async (req, res) => {
 
     await pool.query('UPDATE incidents SET status = ? WHERE id = ?', [status, incidentId]);
 
-    res.status(200).json({ success: true, message: \`Status updated to \${status}\` });
+    res.status(200).json({ success: true, message: 'Status updated to ' + status });
   } catch (error) {
     console.error('Update status error:', error);
     res.status(500).json({ success: false, error: 'Internal server error while updating status' });

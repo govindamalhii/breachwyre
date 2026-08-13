@@ -88,7 +88,8 @@ async function startServer() {
     }
 
     app.listen(PORT, () => {
-console.log(`Server listening on port ${PORT}`);    });
+      console.log('Server listening on port ' + PORT);
+    });
   } catch (err) {
     console.error('Failed to start server:', err);
     process.exit(1);

@@ -1,3 +1,6 @@
+// MUST be first — loads .env before any other module reads process.env
+require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -8,12 +11,11 @@ const { generalLimiter, authLimiter } = require('./middleware/rateLimiter');
 const sanitizeBody = require('./middleware/sanitize');
 
 // Import routes
-const authRoutes = require('./routes/auth.routes');
+const authRoutes     = require('./routes/auth.routes');
 const incidentRoutes = require('./routes/incident.routes');
-const expertRoutes = require('./routes/expert.routes');
-const aiRoutes = require('./routes/ai.routes');
+const expertRoutes   = require('./routes/expert.routes');
+const aiRoutes       = require('./routes/ai.routes');
 
-require('dotenv').config();
 
 const app = express();
 

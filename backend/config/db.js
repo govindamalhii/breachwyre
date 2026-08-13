@@ -33,17 +33,20 @@ const pool = mysql.createPool({
 
 /**
  * Test connection on startup — logs success or failure without crashing.
- * Called from server.js during initialization.
  */
 async function testConnection() {
     try {
         const conn = await pool.getConnection();
-        console.log('[DB] ✅ MySQL connected successfully to:', process.env.DB_HOST || 'localhost');
+        console.log('[DB] ✅ MySQL connected to:', process.env.DB_HOST || 'localhost');
         conn.release();
     } catch (err) {
         console.error('[DB] ❌ MySQL connection failed:', err.message);
-        console.error('[DB] Check your DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT, and DB_SSL env vars.');
     }
 }
 
-module.exports = { pool, testConnection };
+// Export pool directly so all routes work with:
+//   const pool = require('../config/db')
+// Also attach testConnection as a property
+pool.testConnection = testConnection;
+
+module.exports = pool;

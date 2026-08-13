@@ -1,8 +1,15 @@
 {
+  "framework": "vite",
+  "outputDirectory": "dist",
+  "buildCommand": "npm run build",
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://breachwyre-backend.onrender.com/api/:path*"
+      "destination": "https://breachwyre-production.up.railway.app/api/:path*"
+    },
+    {
+      "source": "/((?!api).*)",
+      "destination": "/index.html"
     }
   ]
 }
